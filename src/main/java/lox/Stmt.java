@@ -3,8 +3,8 @@ package lox;
 public abstract class Stmt {
 
     interface Visitor<R> {
-        R visitExpressionStmt();
-        R visitPrintStmt();
+        R visitExpressionStmt(Expression stmt);
+        R visitPrintStmt(Print stmt);
     }
 
     abstract <R> R accept(Visitor<R> visitor);
@@ -19,7 +19,7 @@ public abstract class Stmt {
 
         @Override
         <R> R accept(Visitor<R> visitor) {
-            return visitor.visitExpressionStmt();
+            return visitor.visitExpressionStmt(this);
         }
     }
 
@@ -33,7 +33,7 @@ public abstract class Stmt {
 
         @Override
         <R> R accept(Visitor<R> visitor) {
-            return visitor.visitPrintStmt();
+            return visitor.visitPrintStmt(this);
         }
     }
 }
